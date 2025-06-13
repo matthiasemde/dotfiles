@@ -2,11 +2,12 @@
   description = "Personal dotfiles for matthias & emdem (with per-host overrides)";
 
   inputs = {
-    # home-manager must follow nixpkgs:
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
@@ -48,5 +49,9 @@
         };
       };
     };
+
+    matthias = self.homeConfigurations.matthias.activationPackage;
+    emdem = self.homeConfigurations.emdem.activationPackage;
+    defaultPackage.x86_64-linux = self.matthias;
   };
 }

@@ -1,45 +1,54 @@
 # Remove the default binding for Ctrl + t
 bindkey -r '^T'
 
+# Generic function to create a fzf ui prompt
+# Usage: fzf_ui INPUT_COMMAND PREVIEW_COMMAND [FZF_ARGS...]
+fzf_ui() {
+  local input_cmd="$1"
+  local preview_cmd="$2"
+  shift 2
 
-# Add keyboard shortcut for accessing the zoxide db
+  eval "$input_cmd" | fzf \
+    --preview="$preview_cmd" \
+    --preview-window=right:50%:wrap \
+    --layout=reverse \
+    --height=45% \
+    --border=sharp \
+    --info=inline \
+    --no-sort \
+    --cycle \
+    --bind=ctrl-z:ignore,btab:up,tab:down \
+    --exact \
+    --ansi \
+    --exit-0 \
+    "$@"
+}
+
+# Create a zoxide ui prompt
 __zoxide_widget() {
-  __zoxide_zi
-  zle accept-line
+  local dir
+  # dir=$(fzf_ui "zoxide query -l" "ls -lah --color=always {}")
+  dir=$(fzf_ui "zoxide query -l" "tree -C -L 2 {} 2>/dev/null")
+  [[ -n $dir ]] && cd "$dir"
 }
 
 # Register the zoxide widget and assign an shortcut
 zle -N __zoxide_widget
 bindkey '^T^T' __zoxide_widget
 
+# Create a widget for interactively checking out git branches
+__fzf_git_checkout_widget() {
+  local branch
+  branch=$(fzf_ui \
+    "git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/ | grep -v HEAD" \
+    "git log -5 --color=always --decorate --oneline --graph --abbrev-commit {}")
 
-# Create an fzf command checkout git branches in a project
-function __fzf_custom_git_checkout_branch_widget() {
-    git rev-parse HEAD &> /dev/null || { error "not inside git repository"; return 1; }
-
-    local cmd revision
-    cmd="git for-each-ref --color=always refs/ --format='%(refname:short)' --sort=-committerdate | grep -v HEAD" # this only
-    revision="$(eval "$cmd" | \
-            $(__fzfcmd) --no-preview +m | \
-            tr -d '[:space:]')"
-
-    [[ "$revision" = "" ]] && { error "No revision selected."; return 1; }
-
-    # Different ways to checkout for local revision, tag, or remote revision
-    if $(git show-ref --heads "$revision" &> /dev/null); then
-        printf 'git checkout %q' "$revision"
-    elif $(git show-ref --tags "$revision" &> /dev/null); then
-        printf 'git checkout -b %q %q' tmp-"$revision" "$revision"
-    else
-        printf 'git checkout --track %q' "$revision"
-    fi
-
-    zle accept-line
+  [[ -n $branch ]] && git checkout "$branch"
 }
 
 # Register the git checkout widget and assign a shortcut
-zle -N __fzf_custom_git_checkout_branch_widget
-bindkey '^T^B' __fzf_custom_git_checkout_branch_widget
+zle -N __fzf_git_checkout_widget
+bindkey '^T^B' __fzf_git_checkout_widget
 
 
 # Load p10k config

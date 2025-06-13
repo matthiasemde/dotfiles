@@ -6,7 +6,7 @@ let
     owner = "GitAlias";
     repo = "gitalias";
     rev = "7b27ef766a3557a5708086734559f6a14bb97744";
-    hash = "sha256-IvHM6mRtoeVm01cUmTkKqjm6/n3Izau89B7MT69Afo0=";
+    hash = "sha256-6yqa38l0SPdzKUvdn1KqeHOPEt+Rn3TaXBD5aVhWEng=";
   };
 in
 {
@@ -16,9 +16,9 @@ in
     aliases = {
       # Debug a command or alias - preceed it with `debug`.
       debug = "!set -x; GIT_TRACE=2 GIT_CURL_VERBOSE=2 GIT_TRACE_PERFORMANCE=2 GIT_TRACE_PACK_ACCESS=2 GIT_TRACE_PACKET=2 GIT_TRACE_PACKFILE=2 GIT_TRACE_SETUP=2 GIT_TRACE_SHALLOW=2 git";
-      lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' -n 8;
-      lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all -n 8;
-      lg = !"git lg1";
+      lg1 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' -n 8";
+      lg2 = "log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all -n 8";
+      lg = "git lg1";
     };
     enable = true;
     extraConfig = {
@@ -30,15 +30,15 @@ in
       color.ui = "auto";
       column.ui = "auto";
       commit = {
-        gpgSing = true
+        gpgSing = true;
       };
       core.editor = config.home.sessionVariables."EDITOR" or "vim";
       diff = {
-        tool = vscode;
-        colorMoved = plain;
+        tool = "vscode";
+        colorMoved = "plain";
         mnemonicPrefix = true;
         renames = true;
-        algorithm = histogram;
+        algorithm = "histogram";
       };
       difftool = {
         vscode.cmd = "code --wait --diff \$LOCAL \$REMOTE";
@@ -50,10 +50,10 @@ in
         writeCommitGraph = true;
       };
       filter.lfs = {
-        smudge = git-lfs smudge -- %f;
-        process = git-lfs filter-process;
+        smudge = "git-lfs smudge -- %f";
+        process = "git-lfs filter-process";
         required = true;
-        clean = git-lfs clean -- %f;
+        clean = "git-lfs clean -- %f";
       };
       gpg.program = "gpg2";
       init.defaultBranch = "main";
@@ -87,7 +87,10 @@ in
         gpgSign = true;
         sort = "version:refname";
       };
-      user.useConfigOnly = true;
+      user = {
+        useConfigOnly = true;
+        signingkey = "B553F8169E97D0E33563F977DE0DBC6804FF7C75";
+      };
     };
     ignores = [
       # Compiled source
@@ -131,10 +134,7 @@ in
       skipSmudge = false;
     };
     package = pkgs.gitAndTools.gitFull;
-    user = {
-      signingkey = "B553F8169E97D0E33563F977DE0DBC6804FF7C75";
-      email = "matthias.emde@mvtec.com";
-      name = "Matthias Emde";
-    };
+    userEmail = "matthias.emde@mvtec.com";
+    userName = "Matthias Emde";
   };
 }

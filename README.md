@@ -21,5 +21,8 @@ or
 nix run github:nix-community/home-manager -- switch --flake .#emdem
 ```
 
+## Installation for unprivileged users
+
+
 requirements:
 - nix
