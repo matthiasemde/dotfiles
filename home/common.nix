@@ -3,28 +3,25 @@
 {
   imports = [./shell ./git];
 
-  ##############################
-  # Home-Manager State Version #
-  ##############################
-  home.stateVersion  = "25.05";
-
-  ####################
-  # User Information #
-  ####################
+  # user information
   home.username = username;
   home.homeDirectory = homeDirectory;
 
-  ###################
-  # Home Packages   #
-  ###################
+  # home packages
   home.packages = with pkgs; [
+    neofetch
+    nnn # terminal file manager
+
+    # utils
+    ripgrep # recursively searches directories for a regex pattern
+    fzf # A command-line fuzzy finder
+
     tree
     ripgrep
     fd
     bat
     lazygit
     htop
-    neofetch
     ncdu
     lolcat
     nix
@@ -33,15 +30,25 @@
   programs.zoxide.enable = true;
   programs.fzf.enable = true;
 
-  #############################
-  # Starship Prompt Config    #
-  #############################
-  programs.starship = {
-    enable = true;
-    # Point to a custom Starship TOML; you can also embed settings inline:
-    # You could place this file in ~/.config/starship.toml; Home-Manager can manage it:
-    settings = {
-      add_newline = false;
-    };
+  # environment variables
+  home.sessionVariables = {
+    EDITOR = "code";
+    VISUAL = "code";
   };
+
+  home.file.".bashrc".text = lib.mkForce ''
+    # If this is an interactive Bash/sh session, immediately switch to Zsh
+    if [ -n "$PS1" ] && [ -z "$ZSH_VERSION" ]; then
+      exec zsh -l
+    fi
+  '';
+
+  # This value determines the home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new home Manager release introduces backwards
+  # incompatible changes
+  # You can update home Manager without changing this value. See
+  # the home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "25.05";
 }

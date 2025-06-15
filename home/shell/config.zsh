@@ -1,3 +1,9 @@
+bindkey "^[[1;5C" forward-word   # Ctrl+Right
+bindkey "^[[1;5D" backward-word  # Ctrl+Left
+
+bindkey "^[[H" beginning-of-line # Pos1
+bindkey "^[[F" end-of-line # End
+
 # Remove the default binding for Ctrl + t
 bindkey -r '^T'
 
