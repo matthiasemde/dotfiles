@@ -36,13 +36,6 @@
     VISUAL = "code";
   };
 
-  home.file.".bashrc".text = lib.mkForce ''
-    # If this is an interactive Bash/sh session, immediately switch to Zsh
-    if [ -n "$PS1" ] && [ -z "$ZSH_VERSION" ]; then
-      exec zsh -l
-    fi
-  '';
-
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

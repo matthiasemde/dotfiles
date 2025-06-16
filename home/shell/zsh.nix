@@ -16,9 +16,7 @@ in {
     #   enable = true;
     # };
 
-    shellAliases = {
-      hmu = "nix build .#emdem && ./result/bin/home-manager-generation";
-    };
+    imports = ./zsh_aliases.nix;
 
     initContent = builtins.concatStringsSep "\n\n" [
       zoxideConfig

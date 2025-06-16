@@ -1,13 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  # If you want a different shell or dotfiles for matthias:
-  programs.zsh.enable = true;
-  # programs.neovim.enable = true;
-
-  # Any matthias‐specific overrides go here.
-  # e.g. if matthias wants a special alias:
-  home.file.".bash_aliases".text = ''
-    alias ll="ls -lh"
+  home.file.".bashrc".text = lib.mkForce ''
+    # If this is an interactive Bash/sh session, immediately switch to Zsh
+    if [ -n "$PS1" ] && [ -z "$ZSH_VERSION" ]; then
+      exec zsh -l
+    fi
   '';
 }
