@@ -6,7 +6,9 @@
 }:
 with lib; let
   zoxideConfig = builtins.readFile ./config.zsh;
+  aliases = builtins.readFile ./aliases.zsh;
 in {
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -16,10 +18,10 @@ in {
     #   enable = true;
     # };
 
-    imports = ./zsh_aliases.nix;
 
     initContent = builtins.concatStringsSep "\n\n" [
       zoxideConfig
+      aliases
       ''
         # Set Powerlevel10k theme
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme

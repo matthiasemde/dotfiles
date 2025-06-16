@@ -16,6 +16,9 @@
     ripgrep # recursively searches directories for a regex pattern
     fzf # A command-line fuzzy finder
 
+    # command line utils
+    figlet
+
     tree
     ripgrep
     fd
