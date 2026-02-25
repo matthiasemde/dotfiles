@@ -79,7 +79,7 @@
         ];
 
         config = {
-          Entrypoint = [ "${pkgs.bashInteractive}/bin/bash" ];
+          Entrypoint = [ "${pkgs.github-copilot-cli}/bin/copilot" ];
         };
       };
     };
