@@ -1,41 +1,37 @@
 # Dotfiles
-Dotfile repository based on Nix Home Manager
+
+Personal dotfiles repository based on Nix Home Manager.
 
 ```
 dotfiles/
-├── AGENTS.md
+├── flake.nix              # Nix flake configuration
 ├── flake.lock
-├── flake.nix
-├── home
-│   ├── common.nix
-│   ├── emdem.nix
-│   ├── git
-│   │   ├── default.nix
-│   │   └── git.nix
-│   ├── matthias.nix
-│   ├── security.nix
-│   └── shell
-│       ├── aliases.zsh
-│       ├── atuin.nix
-│       ├── config.zsh
-│       ├── default.nix
-│       └── zsh.nix
-└── README.md
-
-4 directories, 14 files
+├── common/                # Shared configuration
+│   ├── default.nix        # Base packages and programs
+│   ├── git/               # Git configuration
+│   ├── security.nix       # GPG and SSH setup
+│   ├── shell/             # ZSH, Atuin, Powerlevel10k
+│   └── tools/             # Helper scripts
+├── personal/              # Personal profile overrides
+│   └── default.nix
+├── work/                  # Work profile (git submodule)
+└── AGENTS.md
 ```
 
-Install using
+## Install
+
 ```bash
-git clone https://github.com/matthiasemde/dotfiles.git ~/dotfiles
+git clone --recurse-submodules https://github.com/matthiasemde/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 nix run nixpkgs#home-manager -- switch --flake .
 ```
 
-## Update using
+## Update
+
 ```bash
 nix flake update
 ```
 
-requirements:
+## Requirements
+
 - nix
