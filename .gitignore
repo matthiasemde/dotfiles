@@ -1,0 +1,15 @@
+# Nix result symlinks
+result
+result-*
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*~
+*.swp
+*.swo
