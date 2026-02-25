@@ -2,6 +2,7 @@
   description = "Personal dotfiles for matthias & emdem (with per-host overrides)";
 
   inputs = {
+    self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
