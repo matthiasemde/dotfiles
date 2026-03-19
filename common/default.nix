@@ -14,7 +14,11 @@
     ./git
     ./security.nix
     ./tools
+    ./vscode
   ];
+
+  # Desktop-only programs
+  programs.firefox.enable = lib.mkIf config.dotfiles.desktop true;
 
   # User information
   home.username = username;
@@ -31,6 +35,7 @@
     # System utilities
     tree
     htop
+    btop
     ncdu
     bind # provides nslookup
 
