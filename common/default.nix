@@ -16,6 +16,7 @@
     ./security.nix
     ./tools
     ./vscode
+    ./desktop.nix
   ];
 
   # User information
