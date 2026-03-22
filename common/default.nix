@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-small,
   lib,
   username,
   email,
@@ -14,6 +15,7 @@
     ./git
     ./security.nix
     ./tools
+    ./vscode
   ];
 
   # User information
@@ -31,6 +33,7 @@
     # System utilities
     tree
     htop
+    btop
     ncdu
     bind # provides nslookup
 
@@ -39,7 +42,7 @@
     ripgrep
     fd
     bat
-    neofetch
+    fastfetch
     figlet
     lolcat
     screen
@@ -49,7 +52,7 @@
 
     # Development tools
     lazygit
-    github-copilot-cli
+    pkgs-small.github-copilot-cli
 
     # File management
     nnn # terminal file manager

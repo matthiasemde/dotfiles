@@ -1,0 +1,151 @@
+.titlebar-left, .titlebar-right {
+  display: none !important;
+}
+
+.titlebar-container {
+  justify-content: center !important;
+}
+
+.titlebar-center > * > .command-center > * > .monaco-action-bar > * > .action-item:not(.command-center-center) {
+  display: none !important;
+}
+
+.title .label-container {
+  justify-content: center !important;
+}
+
+.title .label-container .title-label {
+  flex: none !important;
+}
+
+div {
+  outline-style: none !important;
+}
+
+.xterm-decoration-overview-ruler {
+  display: none;
+}
+
+.monaco-workbench .editor-group-container,
+.monaco-workbench .part.sidebar,
+.monaco-workbench .part.panel,
+.monaco-workbench .part.auxiliarybar {
+  border-radius: 8px;
+  background-color: #1e1e2d;
+}
+
+.monaco-workbench .editor-group-container::after,
+.monaco-workbench .part.sidebar::after,
+.monaco-workbench .part.panel::after,
+.monaco-workbench .part.auxiliarybar::after {
+  content: "";
+  position: absolute;
+  top: 0px; left: 0px; right: 0px; bottom: 0px;
+  pointer-events: none;
+  border-radius: 8px;
+  box-shadow: 0 0 2px 1px #6c7086aa inset !important;
+  transition: box-shadow 0.2s ease;
+  z-index: 5;
+}
+
+.monaco-workbench .editor-group-container:focus-within:after,
+.monaco-workbench .part.sidebar:focus-within:after,
+.monaco-workbench .part.panel:focus-within:after,
+.monaco-workbench .part.auxiliarybar:focus-within:after {
+  box-shadow: 0 0 2px 2px #cba6f7cc inset !important; /* mauve w/ alpha */
+}
+
+.monaco-workbench .terminal-editor .xterm {
+  top: 0px;
+}
+
+.decorationsOverviewRuler {
+  display: none !important;
+}
+
+.monaco-workbench {
+  background: #11111a;
+}
+
+.quick-input-widget {
+  z-index: 50;
+  border: 2px solid #cba6f7cc !important;
+  box-shadow: 0 0 4px #7a6494cc !important;
+}
+
+.quick-input-list .scrollbar {
+  display: none;
+}
+
+
+
+/* Create a blur overlay */
+.quick-input-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(1px) brightness(0.9);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.quick-input-scrim.visible {
+  opacity: 1;
+}
+
+.monaco-editor .cursors-layer .cursor {
+  background-image: linear-gradient(135deg, #f2a7de 0%, #a093e0 100%);
+  border-radius: 1px;
+}
+
+.title.sho .label-container .monaco-icon-label.file-icon {
+  justify-content: center;
+  padding: 0 !important
+}
+
+.notification-toast {
+  box-shadow: none !important;
+}
+ .label-container .monaco-icon-label.file-icon {
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.title.breadcrumbs .breadcrumbs-control {
+  flex: none !important;
+}
+
+.monaco-action-bar.quick-input-inline-action-bar {
+  display: none
+}
+
+.editor-widget.find-widget {
+  box-shadow: none; border-radius: 4px
+}
+
+.monaco-scrollable-element > .shadow.top {
+  display: none
+}
+
+.monaco-workbench .monaco-list:not(.element-focused):focus:before {
+  outline: none !important
+}
+
+.monaco-list-row.focused {
+  outline: none !important
+}
+
+.monaco-editor .scroll-decoration {
+  display: none
+}
+
+.title-actions {
+  display: none !important
+}
+
+.title .monaco-icon-label:after {
+  margin-right: 0
+}

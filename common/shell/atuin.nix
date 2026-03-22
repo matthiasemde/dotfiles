@@ -5,7 +5,7 @@ let
     owner = "catppuccin";
     repo = "atuin";
     rev = "main";
-    sha256 = "sha256-t/Pq+hlCcdSigtk5uzw3n7p5ey0oH/D5S8GO/0wlpKA=";
+    sha256 = "sha256-4V9Rz37PlBLB1E3JVVYzrJwe9XXlKAFAO5gxWW/cTCw=";
   };
 in
 {
