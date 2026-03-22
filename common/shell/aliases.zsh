@@ -1,7 +1,19 @@
 # zsh aliases and functions
 alias brc="code ~/dotfiles/common/shell/config.zsh"
 alias als="code ~/dotfiles/common/shell/aliases.zsh"
-alias hmu="nix build ~/dotfiles#$USER && ./result/bin/home-manager-generation"
+# Home Manager update: auto-detects user@hostname, falls back to plain user
+hmu() {
+  local host=$(hostname)
+  local target="$USER@$host"
+  # Check if user@host target exists, otherwise fall back to plain user
+  if nix eval ~/dotfiles#homeConfigurations.\"$target\" --apply 'x: true' 2>/dev/null; then
+    echo "Building: $target"
+    nix build ~/dotfiles#homeConfigurations.\"$target\".activationPackage && ./result/activate
+  else
+    echo "No host config for '$host', using default: $USER"
+    nix build ~/dotfiles#homeConfigurations.\"$USER\".activationPackage && ./result/activate
+  fi
+}
 
 alias ll="ls -la"
 alias c="clear"
