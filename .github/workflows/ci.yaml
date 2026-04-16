@@ -1,0 +1,27 @@
+name: Nix CI
+
+on:
+  pull_request:
+
+jobs:
+  nix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Enable flakes
+        run: |
+          mkdir -p ~/.config/nix
+          echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+
+      - name: Check formatting
+        run: |
+          nix fmt -- --fail-on-change
+
+      - name: Flake check
+        run: nix flake check
