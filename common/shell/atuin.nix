@@ -1,4 +1,9 @@
-{ config, pkgs, homeDirectory, ... }:
+{
+  config,
+  pkgs,
+  homeDirectory,
+  ...
+}:
 
 let
   catppuccinAtuin = pkgs.fetchFromGitHub {
