@@ -101,7 +101,8 @@ bindkey '^T^T' __zoxide_widget
 # Create a widget for interactively checking out git branches
 __fzf_git_checkout_widget() {
   fzf_ui \
-    "git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/ | grep -v HEAD" \
+    "git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/heads/;\
+     git for-each-ref --format='%(refname:short)' --sort=-committerdate refs/remotes/origin/ | head -n 50" \
     "git log -5 --color=always --decorate --oneline --graph --abbrev-commit {}" \
     --preview-location=bottom \
     --nowrap \
@@ -116,3 +117,47 @@ bindkey '^T^B' __fzf_git_checkout_widget
 source_if_exists ~/.p10k.zsh
 
 export DISPLAY=$(maybe ps x | sed -n 's/.*Xorg \(:[0-9]\+\).*/\1/p')
+
+gclean() {
+  local current=$(git rev-parse --abbrev-ref HEAD)
+
+  for b in $(git for-each-ref --format='%(refname:short)' refs/heads/); do
+    if [[ "$b" == "$current" ]]; then
+      echo "Skipping currently checked-out branch: $b"
+      continue
+    fi
+
+    # Get configured upstream (may be empty or stale)
+    local track=$(git for-each-ref --format='%(upstream:short)' "refs/heads/$b")
+
+    # Check if remote-tracking ref actually exists
+    if [[ -n "$track" && -n "$(git show-ref "refs/remotes/$track")" ]]; then
+      local realtrack="$track"
+    else
+      local realtrack=""
+    fi
+
+    echo
+    echo "----------------------------------------"
+    echo "Local branch: $b"
+    if [[ -n "$realtrack" ]]; then
+      echo "  Tracks (exists): $realtrack"
+    else
+      echo "  No valid remote tracking branch"
+    fi
+
+    echo
+    echo "Last 3 commits on $b:"
+    git lg1 -3 "$b"
+
+    echo
+    read -q "?Delete branch '$b'? (y/N) "
+    echo
+    if [[ "$REPLY" == "y" ]]; then
+      echo "Deleting $b ..."
+      git branch -D "$b"
+    else
+      echo "Keeping $b"
+    fi
+  done
+}
