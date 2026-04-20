@@ -41,7 +41,7 @@ rebasem() { rebase origin/master "$@"; }
 rebasec() { git rebase --continue; }
 uncommit() { git reset --soft HEAD~1 "$@"; }
 cherry() { git cherry-pick -m 1 -e "$@"; }
-glog() { git lg1 "$@"; }
+lg() { git lg1 "$@"; }
 prune() { git fetch --prune "$@"; }
 diff() { echo "git difftool $@ HEAD" && yes | git difftool "$@"; }
 diffl() { diff HEAD~; }
