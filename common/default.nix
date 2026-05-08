@@ -70,6 +70,12 @@
 
   programs.home-manager.enable = true;
 
+  programs.worktrunk = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+  };
+
   # Enable essential programs
   programs.zoxide.enable = true;
   programs.fzf.enable = true;

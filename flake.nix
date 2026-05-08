@@ -7,6 +7,8 @@
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    worktrunk.url = "github:max-sixty/worktrunk";
+    worktrunk.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -15,6 +17,7 @@
       nixpkgs,
       nixpkgs-small,
       home-manager,
+      worktrunk,
       ...
     }:
     let
@@ -59,6 +62,7 @@
           modules = [
             ./options.nix
             ./common
+            worktrunk.homeModules.default
           ]
           ++ modules
           ++ hostModulesFrom ./hosts hostname
