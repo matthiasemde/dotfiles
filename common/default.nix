@@ -74,6 +74,13 @@
   programs.zoxide.enable = true;
   programs.fzf.enable = true;
 
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+    colors = "auto";
+    extraOptions = [ "--group-directories-first" "--header" ];
+  };
+
   # GitHub CLI configuration with secure credential storage
   programs.gh = {
     enable = true;
