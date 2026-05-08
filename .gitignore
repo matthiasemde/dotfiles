@@ -13,3 +13,7 @@ result-*
 *~
 *.swp
 *.swo
+
+# Token
+.stash_token
+.github_token.json

@@ -9,24 +9,6 @@ bindkey "^[[3~" delete-char # Del
 # Remove the default binding for Ctrl + t
 bindkey -r '^T'
 
-# Useful functions for sourcing scripts or setting default values
-source_if_exists() { [ -f "$1" ] && source "$1"; }
-add_to_path_if_exists() { [ -d "$1" ] && export PATH="$1:$PATH"; }
-maybe() {
-  type "$1" >/dev/null 2>&1 && "$@"
-}
-set_default() {
-  eval "export $1=\"\${$1:-$2}\""
-}
-
-# Set catppuccin colors for fzf: https://github.com/catppuccin/fzf
-export FZF_DEFAULT_OPTS=" \
-  --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
-  --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
-  --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
-  --color=selected-bg:#45475A \
-  --color=border:#313244,label:#CDD6F4"
-
 # Generic function to create a fzf ui prompt
 # Usage: INPUT_COMMAND PREVIEW_COMMAND [--preview-location=right|bottom] [--wrap|--nowrap] [--on-select=CMD]
 fzf_ui() {
@@ -115,8 +97,6 @@ bindkey '^T^B' __fzf_git_checkout_widget
 
 # Load p10k config
 source_if_exists ~/.p10k.zsh
-
-export DISPLAY=$(maybe ps x | sed -n 's/.*Xorg \(:[0-9]\+\).*/\1/p')
 
 gclean() {
   local current=$(git rev-parse --abbrev-ref HEAD)

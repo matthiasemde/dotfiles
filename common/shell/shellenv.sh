@@ -1,21 +1,33 @@
-# zsh aliases and functions
-alias brc="code ~/dotfiles/common/shell/config.zsh"
-alias als="code ~/dotfiles/common/shell/aliases.zsh"
-# Home Manager update: auto-detects user@hostname, falls back to plain user
-hmu() {
-  local host=$(hostname)
-  local target="$USER@$host"
-  # Check if user@host target exists, otherwise fall back to plain user
-  if nix eval ~/dotfiles#homeConfigurations.\"$target\" --apply 'x: true' 2>/dev/null; then
-    echo "Building: $target"
-    nix build ~/dotfiles#homeConfigurations.\"$target\".activationPackage && ./result/activate
-  else
-    echo "No host config for '$host', using default: $USER"
-    nix build ~/dotfiles#homeConfigurations.\"$USER\".activationPackage && ./result/activate
-  fi
-}
+# Portable shell environment - sourced by both bash and zsh
+# POSIX-compatible: no bash-specific or zsh-specific syntax
 
-alias ll="ls -la"
+# Utility functions
+source_if_exists() { [ -f "$1" ] && source "$1"; }
+maybe() { type "$1" >/dev/null 2>&1 && "$@"; }
+set_default() { eval "export $1=\"\${$1:-$2}\""; }
+
+# Memory limit
+ulimit -m 15000000
+
+# # GPG: set TTY and refresh the agent's idea of the tty
+# export GPG_TTY=$(tty)
+# gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
+
+# Display: detect Xorg display from running process list
+export DISPLAY=$(maybe ps x 2>/dev/null | sed -n 's/.*Xorg \(:[0-9]\+\).*/\1/p')
+
+# FZF: Catppuccin Mocha theme
+export FZF_DEFAULT_OPTS=" \
+  --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+  --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+  --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+  --color=selected-bg:#45475A \
+  --color=border:#313244,label:#CDD6F4"
+
+# Zoxide: suppress startup warnings
+export _ZO_DOCTOR=0
+
+alias ll="eza -la"
 alias c="clear"
 alias size="du -sh"
 alias untar="tar -xvf"

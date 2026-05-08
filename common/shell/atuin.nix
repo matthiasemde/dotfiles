@@ -17,6 +17,7 @@ in
   programs.atuin = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
     settings = {
       db_path = "${homeDirectory}/.history.db";
       invert = true;
