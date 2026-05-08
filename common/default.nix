@@ -44,7 +44,8 @@
     fd
     bat
     fastfetch
-    figlet
+    figlet # fancy strings
+    fortune
     lolcat
     screen
 
@@ -101,30 +102,17 @@
     enable = true;
     settings = {
       model = "ollama:gemma4:latest";
-
-      system_prompt = ''
-        You are a command-line assistant.
-        Provide only final answers.
-        Do not include reasoning, internal thoughts, chain-of-thought, or explanations
-        unless explicitly asked.
-      '';
-
       clients = [
         {
           type = "openai-compatible";
           name = "ollama";
           api_base = "http://10.66.8.3:11434/v1";
           models = [
-            {
-              name = "gemma4:latest";
-              supports_function_calling = true;
-              supports_vision = false;
-            }
-            {
-              name = "gemma4:26b";
-              supports_function_calling = true;
-              supports_vision = false;
-            }
+            { name = "gemma4:latest"; }
+            { name = "gemma4:26b"; }
+            { name = "qwen3.6:latest"; }
+            { name = "mistral:7b"; }
+            { name = "phi4:14b"; }
           ];
         }
       ];
