@@ -59,11 +59,6 @@ in
     };
   };
 
-  programs.zsh.initContent = ''
-    export GPG_TTY=$(tty)
-    gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
-  '';
-
   # SSH config
   services.ssh-agent.enable = true;
 
