@@ -18,6 +18,7 @@
     ./vscode
     ./desktop.nix
     ./neovim
+    ./zellij
   ];
 
   # User information
@@ -30,6 +31,7 @@
   # Home packages
   home.packages = with pkgs; [
     # Nix tools
+    nixd
     nixfmt
 
     # System utilities
@@ -66,8 +68,7 @@
 
   # Environment variables
   home.sessionVariables = {
-    EDITOR = "code --wait";
-    VISUAL = "code --wait";
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
   programs.home-manager.enable = true;
