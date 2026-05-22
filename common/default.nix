@@ -17,6 +17,7 @@
     ./tools
     ./vscode
     ./desktop.nix
+    ./neovim
   ];
 
   # User information
