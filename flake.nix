@@ -2,7 +2,7 @@
   description = "Personal dotfiles for matthias & emdem (with per-host overrides)";
 
   inputs = {
-    self.submodules = true;
+    self.submodules = false;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
@@ -111,6 +111,7 @@
       hosts = {
         bemba = "emdem";
         vogel = "matthias";
+        hindemith = "matthias";
       };
 
       # Generate user@host configs for all defined hosts
