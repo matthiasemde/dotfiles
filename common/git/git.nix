@@ -54,12 +54,12 @@ in
         pruneTags = true;
         writeCommitGraph = true;
       };
-      filter.lfs = {
-        smudge = "git-lfs smudge -- %f";
-        process = "git-lfs filter-process";
-        required = true;
-        clean = "git-lfs clean -- %f";
-      };
+      # filter.lfs = {
+      #   smudge = "git-lfs smudge -- %f";
+      #   process = "git-lfs filter-process";
+      #   required = true;
+      #   clean = "git-lfs clean -- %f";
+      # };
       # GPG configuration is in security.nix
       init.defaultBranch = "main";
       help.autocorrect = "off";

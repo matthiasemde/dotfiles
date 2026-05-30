@@ -65,7 +65,7 @@ in
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false; # can be removed once defaults are removed
-    matchBlocks = {
+    settings = {
       "*" = {
         user = username;
         addKeysToAgent = "yes";
