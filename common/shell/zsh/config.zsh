@@ -1,13 +1,55 @@
-bindkey "^[[1;5C" forward-word   # Ctrl+Right
-bindkey "^[[1;5D" backward-word  # Ctrl+Left
+# Make word operations behave more like bash:
+autoload -U select-word-style
+select-word-style bash
+
+# Ctrl+Backspace: stop at punctuation/path separators
+zle -N backward-kill-subword backward-kill-word-match
+zstyle ':zle:backward-kill-subword' word-style normal
+bindkey '^H' backward-kill-subword
+
+# Alt+Backspace: delete back to whitespace only
+zle -N backward-kill-space-word backward-kill-word-match
+zstyle ':zle:backward-kill-space-word' word-style space
+bindkey '^[^?' backward-kill-space-word
+
+# Ctrl+Left / Ctrl+Right: move by subwords (stop at / . - _ etc.)
+zle -N backward-subword backward-word-match
+zle -N forward-subword  forward-word-match
+zstyle ':zle:backward-subword' word-style normal
+zstyle ':zle:forward-subword'  word-style normal
+bindkey '^[[1;5D' backward-subword
+bindkey '^[[1;5C' forward-subword
+
+# Alt+Left / Alt+Right: move by space-delimited WORDs
+zle -N backward-space-word backward-word-match
+zle -N forward-space-word  forward-word-match
+zstyle ':zle:backward-space-word' word-style space
+zstyle ':zle:forward-space-word'  word-style space
+bindkey '^[[1;3D' backward-space-word
+bindkey '^[[1;3C' forward-space-word
 
 bindkey "^[[H" beginning-of-line # Pos1
 bindkey "^[[F" end-of-line # End
 
 bindkey "^[[3~" delete-char # Del
 
+bindkey '^Z' undo
+bindkey '^[z' redo
+
 # Remove the default binding for Ctrl + t
 bindkey -r '^T'
+
+# Tab completion: complete common prefix first, list options on second tab (bash-like)
+setopt NO_AUTO_MENU
+setopt AUTO_LIST
+
+# Ctrl+L: clear screen and scrollback buffer
+__clear_screen() { printf '\033[2J\033[3J\033[H'; zle .reset-prompt; }
+zle -N __clear_screen
+bindkey '^L' __clear_screen
+
+# Ctrl+V: remove quoted-insert so terminal paste (Ctrl+V) works
+bindkey -r '^V'
 
 # Generic function to create a fzf ui prompt
 # Usage: INPUT_COMMAND PREVIEW_COMMAND [--preview-location=right|bottom] [--wrap|--nowrap] [--on-select=CMD]

@@ -682,5 +682,29 @@
   {
     "key": "ctrl+shift+alt+down",
     "command": "-editor.action.copyLinesDownAction"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001b[1;3D"
+    },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001b[1;3C"
+    },
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+      "text": "\u001bz"
+    },
+    "when": "terminalFocus"
   }
 ]
