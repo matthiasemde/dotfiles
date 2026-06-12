@@ -90,6 +90,7 @@
 
   programs.worktrunk = {
     enable = true;
+    package = pkgs.worktrunk;
     enableZshIntegration = true;
     enableBashIntegration = true;
   };
