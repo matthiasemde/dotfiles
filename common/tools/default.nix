@@ -14,7 +14,12 @@ let
     nixGpgSigningKey = gpgSigningKey;
   };
   gpgHelper = pkgs.writeShellScriptBin "gpg-helper" (builtins.readFile gpgHelperScript);
+
+  txt2htmlPreview = pkgs.writeShellScriptBin "txt2htmlPreview" (builtins.readFile ./txt2htmlPreview.sh);
 in
 {
-  home.packages = [ gpgHelper ];
+  home.packages = [
+    gpgHelper
+    txt2htmlPreview
+  ];
 }
