@@ -8,6 +8,16 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     worktrunk.url = "github:max-sixty/worktrunk";
     worktrunk.inputs.nixpkgs.follows = "nixpkgs";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    vicinae.url = "github:vicinaehq/vicinae";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs =
@@ -16,6 +26,10 @@
       nixpkgs,
       home-manager,
       worktrunk,
+      niri,
+      vicinae,
+      noctalia,
+      nix-colors,
       ...
     }:
     let
@@ -55,6 +69,10 @@
             ./options.nix
             ./common
             worktrunk.homeModules.default
+            niri.homeModules.niri
+            vicinae.homeManagerModules.default
+            noctalia.homeModules.default
+            nix-colors.homeManagerModules.default
           ]
           ++ modules
           ++ hostModulesFrom ./hosts hostname
@@ -66,6 +84,7 @@
 
           extraSpecialArgs = {
             inherit
+              inputs
               username
               email
               homeDirectory
