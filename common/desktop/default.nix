@@ -6,6 +6,11 @@
 }:
 
 lib.mkIf config.dotfiles.desktop {
+  imports = [
+    ./vscode
+    ./window-manager
+  ];
+
   fonts.fontconfig.enable = true;
 
   # Desktop-only programs

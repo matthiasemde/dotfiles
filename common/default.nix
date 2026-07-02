@@ -14,8 +14,7 @@
     ./git
     ./security.nix
     ./tools
-    ./vscode
-    ./desktop.nix
+    ./desktop
   ];
 
   # User information
