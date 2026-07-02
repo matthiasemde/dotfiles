@@ -47,6 +47,8 @@
     fortune
     lolcat
     screen
+    sops
+    inetutils
 
     # simplified man pages
     tldr
