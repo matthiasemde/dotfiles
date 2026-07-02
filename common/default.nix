@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  pkgs-small,
   lib,
   username,
   email,
@@ -54,7 +53,7 @@
 
     # Development tools
     lazygit
-    pkgs-small.github-copilot-cli
+    github-copilot-cli
 
     # File management
     nnn # terminal file manager

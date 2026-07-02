@@ -4,7 +4,6 @@
   inputs = {
     self.submodules = false;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     worktrunk.url = "github:max-sixty/worktrunk";
@@ -15,7 +14,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-small,
       home-manager,
       worktrunk,
       ...
@@ -23,12 +21,6 @@
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-      pkgs-small = import nixpkgs-small {
         inherit system;
         config = {
           allowUnfree = true;
@@ -78,7 +70,6 @@
               email
               homeDirectory
               gpgSigningKey
-              pkgs-small
               ;
           };
         };
