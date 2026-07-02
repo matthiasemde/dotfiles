@@ -17,5 +17,7 @@ lib.mkIf config.dotfiles.desktop {
     signal-desktop
     element-desktop
     nerd-fonts.iosevka
+    keymapp
+    vlc
   ];
 }
