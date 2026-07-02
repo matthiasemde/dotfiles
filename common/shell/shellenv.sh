@@ -33,6 +33,7 @@ alias size="du -sh"
 alias untar="tar -xvf"
 alias which="type"
 alias mem="/usr/bin/time -f \"%M\"kb"
+alias sops="EDITOR=vim sops"
 
 ## #############################################################
 ## alias functions for git
