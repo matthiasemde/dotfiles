@@ -73,6 +73,15 @@ in
         forwardAgent = false;
         # LocalForward = "5010 localhost:5010";
       };
+      "mey" = {
+        hostname = "91.98.74.56";
+        user = "matthias";
+        identityFile = "/home/${username}/.ssh/hetzner_v3";
+        addKeysToAgent = "yes";
+        identitiesOnly = true;
+        forwardAgent = false;
+        # LocalForward = "5010 localhost:5010";
+      };
     };
   };
 
