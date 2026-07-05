@@ -4,18 +4,24 @@
   ...
 }:
 
+with lib;
+
 {
   options.dotfiles = {
-    hostname = lib.mkOption {
-      type = lib.types.str;
+    hostname = mkOption {
+      type = types.str;
       default = "generic";
       description = "The hostname of the machine being configured.";
     };
 
-    desktop = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether this is a desktop (non-headless) machine. Headless by default.";
+    desktop = {
+      enable = mkEnableOption "desktop";
+
+      wallpaper = mkOption {
+        type = types.str;
+        example = "./wallpaper.png";
+        description = "Path to the wallpaper image.";
+      };
     };
   };
 }

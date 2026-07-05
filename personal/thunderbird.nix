@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.mkIf config.dotfiles.desktop {
+lib.mkIf config.dotfiles.desktop.enable {
   programs.thunderbird = {
     enable = true;
     profiles.matthias = {

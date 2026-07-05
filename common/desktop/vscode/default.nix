@@ -24,7 +24,7 @@ let
   });
 in
 {
-  config = lib.mkIf config.dotfiles.desktop {
+  config = lib.mkIf config.dotfiles.desktop.enable {
     programs.vscode = {
       enable = true;
       package = vscodePatched;
