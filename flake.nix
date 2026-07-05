@@ -10,6 +10,10 @@
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +30,7 @@
       nixpkgs,
       home-manager,
       niri,
+      stylix,
       nur,
       run-copilot,
       ...
@@ -67,6 +72,7 @@
             ./options.nix
             ./common
             niri.homeModules.niri
+            stylix.homeModules.stylix
           ]
           ++ modules
           ++ hostModulesFrom ./hosts hostname

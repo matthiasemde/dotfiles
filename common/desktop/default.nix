@@ -18,7 +18,6 @@
     home.packages = with pkgs; [
       feishin
       signal-desktop
-      nerd-fonts.iosevka
       keymapp
       vlc
     ];

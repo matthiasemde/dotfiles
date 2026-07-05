@@ -8,6 +8,35 @@
 let
   workbenchDir = "lib/vscode/resources/app/out/vs/code/electron-browser/workbench";
 
+  c = config.lib.stylix.colors.withHashtag;
+  background = c.base00;
+  surface = c.base01;
+  selection = c.base02;
+
+  foreground = c.base05;
+  muted = c.base03;
+
+  primary = c.base0D; # blue
+  secondary = c.base0E; # magenta
+  accent = c.base0C; # cyan
+
+  success = c.base0B;
+  warning = c.base0A;
+  error = c.base08;
+
+  customCSS = pkgs.replaceVars ./custom.css {
+    background = background;
+    primary = primary;
+    muted = muted;
+  };
+
+  settings = pkgs.replaceVars ./settings.json {
+    background = background;
+    foreground = foreground;
+    muted = muted;
+    surface = surface;
+  };
+
   vscodePatched = pkgs.vscode.overrideAttrs (old: {
     postInstall = (old.postInstall or "") + ''
       workbench="$out/${workbenchDir}"
@@ -18,7 +47,7 @@ let
         -e 's|</body>|<script src="./custom.js"></script>\n\t</body>|' \
         "$workbench/workbench.html"
 
-      cp ${./custom.css} "$workbench/custom.css"
+      cp ${customCSS} "$workbench/custom.css"
       cp ${./custom.js} "$workbench/custom.js"
     '';
   });
@@ -44,7 +73,7 @@ in
           github.copilot-chat
         ];
 
-        userSettings = builtins.fromJSON (builtins.readFile ./settings.json);
+        userSettings = builtins.fromJSON (builtins.readFile settings);
         keybindings = builtins.fromJSON (builtins.readFile ./keybindings.json);
       };
     };

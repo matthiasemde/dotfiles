@@ -31,7 +31,7 @@ div {
 .monaco-workbench .part.panel,
 .monaco-workbench .part.auxiliarybar {
   border-radius: 8px;
-  background-color: #1e1e2d;
+  background-color: @background@;
 }
 
 .monaco-workbench .editor-group-container::after,
@@ -43,7 +43,7 @@ div {
   top: 0px; left: 0px; right: 0px; bottom: 0px;
   pointer-events: none;
   border-radius: 8px;
-  box-shadow: 0 0 2px 1px #6c7086aa inset !important;
+  box-shadow: 0 0 2px 1px @background@ inset !important;
   transition: box-shadow 0.2s ease;
   z-index: 5;
 }
@@ -52,7 +52,7 @@ div {
 .monaco-workbench .part.sidebar:focus-within:after,
 .monaco-workbench .part.panel:focus-within:after,
 .monaco-workbench .part.auxiliarybar:focus-within:after {
-  box-shadow: 0 0 2px 2px #cba6f7cc inset !important; /* mauve w/ alpha */
+  box-shadow: 0 0 2px 2px @primary@ inset !important; /* mauve w/ alpha */
 }
 
 .monaco-workbench .terminal-editor .xterm {
@@ -64,13 +64,13 @@ div {
 }
 
 .monaco-workbench {
-  background: #11111a;
+  background: @background@;
 }
 
 .quick-input-widget {
   z-index: 50;
-  border: 2px solid #cba6f7cc !important;
-  box-shadow: 0 0 4px #7a6494cc !important;
+  border: 2px solid @primary@ !important;
+  box-shadow: 0 0 4px @muted@ !important;
 }
 
 .quick-input-list .scrollbar {
@@ -97,7 +97,7 @@ div {
 }
 
 .monaco-editor .cursors-layer .cursor {
-  background-image: linear-gradient(135deg, #f2a7de 0%, #a093e0 100%);
+  background-image: linear-gradient(135deg, @primary@ 0%, @muted@ 100%);
   border-radius: 1px;
 }
 
