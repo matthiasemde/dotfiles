@@ -9,6 +9,7 @@
     ./niri.nix
     ./alacritty.nix
     ./vicinae.nix
+    ./stylix.nix
   ];
 
   config = lib.mkIf config.dotfiles.desktop.enable {

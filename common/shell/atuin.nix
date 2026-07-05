@@ -26,10 +26,10 @@ in
       prefers_reduced_motion = true;
 
       # Make sure Atuin uses the Catppuccin theme
-      theme.name = "catppuccin-mocha-sky";
+      # theme.name = "catppuccin-mocha-sky";
     };
   };
 
   # Add Catppuccin theme to atuin config
-  xdg.configFile."atuin/themes".source = "${catppuccinAtuin}/themes/mocha";
+  # xdg.configFile."atuin/themes".source = "${catppuccinAtuin}/themes/mocha";
 }

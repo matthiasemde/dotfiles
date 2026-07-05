@@ -2,9 +2,12 @@
   config,
   pkgs,
   lib,
+  niri,
   ...
 }:
 {
+  imports = [ niri.homeModules.stylix ];
+
   config = lib.mkIf config.dotfiles.desktop.enable {
     # use niri packages provided by the niri flake
     nixpkgs.overlays = [ niri.overlays.niri ];
@@ -26,11 +29,6 @@
 
         default-column-width = {
           proportion = 0.5;
-        };
-
-        focus-ring = {
-          enable = true;
-          width = 2;
         };
       };
 
