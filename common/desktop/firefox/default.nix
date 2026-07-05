@@ -42,6 +42,7 @@
       profiles = {
         matthias = {
           extensions = {
+            force = true;
             packages = with pkgs.nur.repos.rycee.firefox-addons; [
               ublock-origin
               bitwarden
@@ -57,7 +58,7 @@
             privateDefault = "ddg";
 
             engines = {
-              "Nix Packages" = {
+              "nix-packages" = {
                 urls = [
                   {
                     template = "https://search.nixos.org/packages";
@@ -77,7 +78,7 @@
                 definedAliases = [ "@np" ];
               };
 
-              "Nix Options" = {
+              "nixos-options" = {
                 urls = [
                   {
                     template = "https://search.nixos.org/options";
@@ -97,7 +98,7 @@
                 definedAliases = [ "@no" ];
               };
 
-              "NixOS Wiki" = {
+              "nixos-wiki" = {
                 urls = [
                   {
                     template = "https://wiki.nixos.org/w/index.php";
@@ -113,7 +114,31 @@
                 definedAliases = [ "@nw" ];
               };
 
-              "YouTube" = {
+              "home-manager-options" = {
+                urls = [
+                  {
+                    template = "https://search.nixos.org/options";
+                    params = [
+                      {
+                        name = "channel";
+                        value = "unstable";
+                      }
+                      {
+                        name = "query";
+                        value = "{searchTerms}";
+                      }
+                      {
+                        name = "search";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                definedAliases = [ "@hm" ];
+              };
+
+              "youtube" = {
                 urls = [
                   {
                     template = "https://www.youtube.com/results";

@@ -32,7 +32,6 @@
     # System utilities
     tree
     htop
-    btop
     ncdu
     bind # provides nslookup
 
@@ -111,6 +110,8 @@
       "--header"
     ];
   };
+
+  programs.btop.enable = true;
 
   # GitHub CLI configuration with secure credential storage
   programs.gh = {
