@@ -46,6 +46,7 @@
     fortune
     lolcat
     screen
+    shfmt
     sops
     inetutils
 
@@ -67,6 +68,7 @@
   home.sessionVariables = {
     EDITOR = "code --wait";
     VISUAL = "code --wait";
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 
   programs.home-manager.enable = true;
