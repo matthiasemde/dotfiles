@@ -12,6 +12,10 @@
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,6 +25,7 @@
       home-manager,
       worktrunk,
       niri,
+      nur,
       ...
     }:
     let
@@ -77,6 +82,7 @@
               homeDirectory
               gpgSigningKey
               niri
+              nur
               ;
           };
         };
