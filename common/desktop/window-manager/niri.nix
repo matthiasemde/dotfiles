@@ -15,6 +15,7 @@
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
     programs.niri.settings = {
+      xwayland-satellite.path = "${lib.getExe pkgs.xwayland-satellite}";
       hotkey-overlay.skip-at-startup = true;
       # ask windows to omit client-side-decorations
       prefer-no-csd = true;
@@ -46,14 +47,26 @@
             bottom-right = 8.0;
           };
           clip-to-geometry = true;
-          opacity = 0.75;
+          opacity = 0.8;
           background-effect = {
             blur = true;
           };
         }
         {
           matches = [ { is-active = true; } ];
-          opacity = 0.85;
+          opacity = 0.9;
+        }
+        {
+          matches = [ { app-id = "^code$"; } ];
+          default-column-width.proportion = 1.0;
+        }
+        {
+          matches = [
+            {
+              app-id = "^(element|signal|thunderbird)$";
+            }
+          ];
+          block-out-from = "screencast";
         }
       ];
 
@@ -66,6 +79,16 @@
           "vicinae"
           "open"
         ];
+        "Mod+Period".action.spawn = [
+          "vicinae"
+          "deeplink"
+          "vicinae://launch/core/search-emojis"
+        ];
+        "Mod+V".action.spawn = [
+          "vicinae"
+          "deeplink"
+          "vicinae://launch/clipboard/history"
+        ];
         "Mod+O".action.toggle-overview = [ ];
         "Mod+L".action.power-off-monitors = [ ];
 
@@ -74,14 +97,14 @@
         "Mod+Up".action.focus-window-up = [ ];
         "Mod+Right".action.focus-column-right = [ ];
 
-        "Mod+Prior".action.move-column-left = [ ];
-        "Mod+Next".action.move-column-right = [ ];
+        "Mod+Next".action.move-column-left = [ ];
+        "Mod+Prior".action.move-column-right = [ ];
 
         "Mod+Ctrl+Left".action.focus-monitor-left = [ ];
         "Mod+Ctrl+Right".action.focus-monitor-right = [ ];
 
-        "Mod+Ctrl+Prior".action.move-window-to-monitor-left = [ ];
-        "Mod+Ctrl+Next".action.move-window-to-monitor-right = [ ];
+        "Mod+Ctrl+Next".action.move-window-to-monitor-left = [ ];
+        "Mod+Ctrl+Prior".action.move-window-to-monitor-right = [ ];
 
         "Mod+R".action.switch-preset-column-width = [ ];
         "Mod+Shift+R".action.switch-preset-column-width-back = [ ];
