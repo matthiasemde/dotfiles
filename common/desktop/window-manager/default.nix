@@ -15,8 +15,19 @@
 
     home.packages = with pkgs; [
       swaybg
+      libsecret
       xwayland-satellite # xwayland support
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
     ];
+
+    xdg.portal = {
+      enable = true;
+      config.common.default = [
+        "wlr"
+        "gtk"
+      ];
+    };
 
     xdg.configFile."autostart/swaybg.desktop".text = ''
       [Desktop Entry]
@@ -25,6 +36,23 @@
       Exec=${pkgs.swaybg}/bin/swaybg -m fill -i ${config.dotfiles.desktop.wallpaper}
       X-GNOME-Autostart-enabled=true
     '';
+
+    xdg.mimeApps = {
+      enable = true;
+
+      defaultApplications = {
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "text/html" = "firefox.desktop";
+        "application/pdf" = "firefox.desktop";
+        "video/mp4" = "vlc.desktop";
+        "video/x-matroska" = "vlc.desktop";
+      };
+      associations.added = {
+        "video/mp4" = "vlc.desktop";
+        "video/x-matroska" = "vlc.desktop";
+      };
+    };
 
     services.swayidle =
       let
@@ -44,10 +72,10 @@
             command = display "off";
             resumeCommand = display "on";
           }
-          {
-            timeout = 1800;
-            command = "${pkgs.systemd}/bin/systemctl suspend";
-          }
+          # {
+          #   timeout = 1800;
+          #   command = "${pkgs.systemd}/bin/systemctl suspend";
+          # }
         ];
 
         events = {
