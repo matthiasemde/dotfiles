@@ -10,6 +10,10 @@
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     run-copilot = {
       url = "git+ssh://git@stash.mvtec.com:7999/dp/devcontainer-base.git?ref=add-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,6 +26,7 @@
       nixpkgs,
       home-manager,
       niri,
+      nur,
       run-copilot,
       ...
     }:
@@ -78,6 +83,7 @@
               homeDirectory
               gpgSigningKey
               niri
+              nur
               run-copilot
               ;
           };
