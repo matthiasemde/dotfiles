@@ -50,6 +50,17 @@
         };
       };
     };
+
+    window-rules = [
+      {
+        matches = [ { app-id = "^(firefox|thunderbird|element|feishin|signal)$"; } ];
+        open-on-output = "DP-2";
+      }
+      {
+        matches = [ { app-id = "^(vicinae|code)$"; } ];
+        open-on-output = "HDMI-A-2";
+      }
+    ];
   };
 
   home.packages = with pkgs; [
