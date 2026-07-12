@@ -8,15 +8,12 @@
   imports = [
     ./vscode
     ./window-manager
+    ./firefox
   ];
 
   config = lib.mkIf config.dotfiles.desktop.enable {
 
     fonts.fontconfig.enable = true;
-
-    # Desktop-only programs
-    programs.firefox.enable = true;
-    programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     home.packages = with pkgs; [
       feishin
