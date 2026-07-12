@@ -98,6 +98,7 @@
   # Enable essential programs
   programs.zoxide.enable = true;
   programs.fzf.enable = true;
+  programs.fzf.historyWidget.command = ""; # disable Ctrl-R as not to collide with atuin
 
   programs.eza = {
     enable = true;
