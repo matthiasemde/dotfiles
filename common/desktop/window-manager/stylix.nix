@@ -44,6 +44,7 @@
       bat.enable = true;
       fzf.enable = true;
       btop.enable = true;
+      qt.enable = true;
     };
   };
 }

@@ -23,7 +23,7 @@
       prefer-no-csd = true;
       gestures.hot-corners.enable = false;
       layout = {
-        gaps = 16;
+        gaps = 12;
         center-focused-column = "never";
         always-center-single-column = true;
 
