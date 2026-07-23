@@ -10,6 +10,7 @@
     ./alacritty.nix
     ./vicinae.nix
     ./stylix.nix
+    ./quickshell
   ];
 
   config = lib.mkIf config.dotfiles.desktop.enable {
