@@ -27,6 +27,16 @@ in
 
       # Make sure Atuin uses the Catppuccin theme
       theme.name = "catppuccin-mocha-sky";
+    }
+    # Ai settings: Ollama-backed, proxied through atuin-ai-server
+    // lib.optionalAttrs cfg.enable {
+      ai = {
+        enabled = true;
+        endpoint = cfg.server;
+        endpoint_protocol = "oss";
+        db_path = "${homeDirectory}/.atuin_ai_sessions.db";
+        model = cfg.model;
+      };
     };
   };
 
