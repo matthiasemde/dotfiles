@@ -6,8 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    worktrunk.url = "github:max-sixty/worktrunk";
-    worktrunk.inputs.nixpkgs.follows = "nixpkgs";
     niri = {
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,7 +17,6 @@
       self,
       nixpkgs,
       home-manager,
-      worktrunk,
       niri,
       ...
     }:
@@ -59,7 +56,6 @@
           modules = [
             ./options.nix
             ./common
-            worktrunk.homeModules.default
             niri.homeModules.niri
           ]
           ++ modules
