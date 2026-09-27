@@ -7,6 +7,10 @@
 
 {
   dotfiles.hostname = "vogel";
+  dotfiles.atuin = {
+    syncAddress = "http://atuin.mahler.local";
+    ai.server = "http://atuin-ai.mahler.local";
+  };
   dotfiles.desktop.enable = true;
   dotfiles.desktop.wallpaper = "/mnt/mahler/files/Bilder/Wallpapers/SchottlandWallpaper.jpg";
 

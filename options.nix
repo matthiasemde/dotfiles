@@ -24,23 +24,30 @@ with lib;
       };
     };
 
-    # Atuin AI (Ollama-backed, via atuin-ai-server)
-    atuinAi = {
-      enable = mkEnableOption "Atuin AI support";
-
-      model = mkOption {
+    atuin = {
+      syncAddress = mkOption {
         type = types.str;
-        default = "qwen3.8:27b";
-        example = "qwen3.8:27b";
-        description = ''
-          Ollama model to use for Atuin AI.
-          The model (and engine) must support tool calling.
-        '';
+        default = "https://atuin.emdecloud.de";
+        description = "URL of the self-hosted Atuin sync server.";
       };
 
-      server = mkOption {
-        type = types.str;
-        description = "URL of the machine where atuin-ai-server runs, as seen from Atuin.";
+      ai = {
+        enable = mkEnableOption "Atuin AI support";
+
+        model = mkOption {
+          type = types.str;
+          default = "qwen3.8:27b";
+          example = "qwen3.8:27b";
+          description = ''
+            Ollama model to use for Atuin AI.
+            The model (and engine) must support tool calling.
+          '';
+        };
+
+        server = mkOption {
+          type = types.str;
+          description = "URL of the machine where atuin-ai-server runs, as seen from Atuin.";
+        };
       };
     };
   };
