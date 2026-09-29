@@ -49,6 +49,7 @@
     shfmt
     sops
     inetutils
+    devcontainer
 
     # simplified man pages
     tldr
