@@ -100,7 +100,10 @@
 
   # Enable essential programs
   programs.zoxide.enable = true;
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    historyWidget.command = "";
+  };
 
   programs.eza = {
     enable = true;
