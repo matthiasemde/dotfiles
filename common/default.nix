@@ -120,25 +120,4 @@
       prompt = "enabled";
     };
   };
-
-  programs.aichat = {
-    enable = true;
-    settings = {
-      model = "ollama:gemma4:latest";
-      clients = [
-        {
-          type = "openai-compatible";
-          name = "ollama";
-          api_base = "http://10.66.8.3:11434/v1";
-          models = [
-            { name = "gemma4:latest"; }
-            { name = "gemma4:26b"; }
-            { name = "qwen3.6:latest"; }
-            { name = "mistral:7b"; }
-            { name = "phi4:14b"; }
-          ];
-        }
-      ];
-    };
-  };
 }
