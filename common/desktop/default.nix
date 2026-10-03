@@ -20,6 +20,10 @@
       signal-desktop
       keymapp
       vlc
+
+      # GNOME packages used by portals
+      nautilus
+      gvfs
     ];
 
     programs.element-desktop = {

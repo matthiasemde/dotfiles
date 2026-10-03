@@ -26,11 +26,30 @@
       extraPortals = with pkgs; [
         xdg-desktop-portal-gnome
         xdg-desktop-portal-gtk
+        xdg-desktop-portal-wlr
       ];
-      config.common.default = [
-        "gnome"
-        "gtk"
-      ];
+      config.common = {
+        default = [
+          "gtk"
+          "wlr"
+        ];
+        
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "gtk"
+        ];
+
+        "org.freedesktop.impl.portal.OpenURI" = [
+          "gtk"
+        ];
+
+        "org.freedesktop.impl.portal.ScreenCast" = [
+          "wlr"
+        ];
+
+        "org.freedesktop.impl.portal.Screenshot" = [
+          "wlr"
+        ];
+      };
     };
 
     xdg.configFile."autostart/swaybg.desktop".text = ''
