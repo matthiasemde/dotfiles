@@ -44,5 +44,18 @@
         integrations_rest_url = "https://scalar.vector.im/api";
       };
     };
+
+    dotfiles.wine.programs = {
+      mp3tag = {
+        url = "https://download.mp3tag.de/mp3tag-v3.35.1-x64-setup.exe";
+        sha256 = "5be51f75691fb3556bb069bf5800ba5872cd3e38fb0bbec35715e5cde5f2d9ad";
+        installedExe = "Program Files/Mp3tag/Mp3tag.exe";
+      };
+      irfanview = {
+        url = "https://domainunion.de/irfanview/iview475g_x64_setup.exe";
+        sha256 = "6b7e36c089194347be1bea5fea08dc97316f2181e40427e7e2867ad7ba3906a0";
+        installedExe = "Program Files/IrfanView/i_view64.exe";
+      };
+    };
   };
 }

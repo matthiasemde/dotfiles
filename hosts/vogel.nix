@@ -71,7 +71,6 @@
     android-studio
     android-tools
     discord
-    wineWow64Packages.wayland
     kopia-ui
 
     # CAD & 3D printing

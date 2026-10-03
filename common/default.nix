@@ -15,6 +15,7 @@
     ./security.nix
     ./tools
     ./desktop
+    ./wine
   ];
 
   # User information

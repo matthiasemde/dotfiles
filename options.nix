@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -12,6 +13,60 @@ with lib;
       type = types.str;
       default = "generic";
       description = "The hostname of the machine being configured.";
+    };
+
+    wine = {
+      package = mkOption {
+        type = types.package;
+        default = pkgs.wineWow64Packages.wayland;
+        defaultText = lib.literalExpression "pkgs.wineWow64Packages.wayland";
+        description = ''
+          The Wine package to use. Defaults to wineWow64Packages.wayland which supports
+          both 32-bit and 64-bit Windows applications and prefixes.
+        '';
+      };
+      programs = mkOption {
+        type = types.attrsOf (
+          types.submodule {
+            options = {
+              url = mkOption {
+                type = types.str;
+                description = "Download URL for the Windows installer executable.";
+              };
+              sha256 = mkOption {
+                type = types.str;
+                description = "SHA256 hash of the installer executable.";
+              };
+              installedExe = mkOption {
+                type = types.str;
+                description = ''
+                  Path to the installed binary relative to the Wine prefix C:\ drive.
+                  Example: "Program Files/MyApp/myapp.exe"
+                '';
+              };
+              winePrefix = mkOption {
+                type = types.nullOr types.str;
+                default = null;
+                description = ''
+                  Wine prefix directory. Defaults to ~/.wine when null.
+                  Use an absolute path or a shell expression like "$HOME/.wine/myapp".
+                '';
+              };
+            };
+          }
+        );
+        default = { };
+        description = "Windows programs to install and run via Wine, keyed by the command name to expose in PATH.";
+        example = lib.literalExpression ''
+          {
+            myapp = {
+              url = "https://example.com/myapp-setup.exe";
+              sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+              installedExe = "Program Files/MyApp/myapp.exe";
+            };
+          }
+        '';
+      };
     };
 
     desktop = {
