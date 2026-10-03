@@ -18,6 +18,8 @@ in
     xdg.configFile."quickshell/shell.qml".source    = ./qt/shell.qml;
     xdg.configFile."quickshell/Island.qml".source   = ./qt/Island.qml;
     xdg.configFile."quickshell/ClockLayer.qml".source   = ./qt/ClockLayer.qml;
+    xdg.configFile."quickshell/MenuLayer.qml".source    = ./qt/MenuLayer.qml;
+    xdg.configFile."quickshell/VolumeLayer.qml".source  = ./qt/VolumeLayer.qml;
     xdg.configFile."quickshell/PaletteLayer.qml".source = ./qt/PaletteLayer.qml;
 
     xdg.configFile."quickshell/Theme.js".text = ''

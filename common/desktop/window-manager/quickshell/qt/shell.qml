@@ -12,16 +12,13 @@ ShellRoot {
             right: true
         }
 
-        // Height tracks the animated island so the compositor always
-        // reserves exactly the right amount of space at the top edge.
         implicitHeight: 12 + island.height
         color: "transparent"
 
-        // Float above app windows without pushing them down.
+        WlrLayershell.layer: WlrLayer.Top
         WlrLayershell.exclusiveZone: 48
 
-        // Restrict pointer input to the visible island only so the
-        // transparent remainder of the panel doesn't swallow events.
+        // Restrict pointer input to the visible island only.
         mask: Region {
             Region {
                 intersection: Intersection.Combine
@@ -37,6 +34,23 @@ ShellRoot {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 12
+        }
+
+        // Hover overlay — declared AFTER Island so it sits above it in z-order
+        // and receives hover events first.  Being a sibling (not a child) of
+        // Island means nothing inside Island's subtree can steal hover from it.
+        // acceptedButtons: Qt.NoButton lets all click events fall through to
+        // Island's TapHandlers.
+        MouseArea {
+            x: island.x
+            y: island.y
+            width: island.width
+            height: island.height
+            hoverEnabled: true
+            acceptedButtons: Qt.NoButton
+
+            onEntered: island.hovered = true
+            onExited:  island.hovered = false
         }
     }
 }
