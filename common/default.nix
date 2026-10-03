@@ -58,9 +58,6 @@
     lazygit
     github-copilot-cli
 
-    # File management
-    nnn # terminal file manager
-
     # Media tools
     imagemagick
   ];
@@ -113,6 +110,11 @@
       "--group-directories-first"
       "--header"
     ];
+  };
+
+  programs.yazi = {
+    enable = true;
+    shellWrapperName = "y";
   };
 
   programs.btop.enable = true;
