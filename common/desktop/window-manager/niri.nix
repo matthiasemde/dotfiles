@@ -13,7 +13,7 @@
     nixpkgs.overlays = [ niri.overlays.niri ];
 
     programs.niri.enable = true;
-    programs.niri.package = pkgs.niri-unstable;
+    programs.niri.package = pkgs.callPackage ./niri-wrapped.nix { };
     home.sessionVariables.NIXOS_OZONE_WL = "1";
 
     programs.niri.settings = {
