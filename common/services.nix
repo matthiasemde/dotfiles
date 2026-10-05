@@ -30,7 +30,7 @@ in
     Service = {
       Type = "oneshot";
       ExecStart = ''
-        ${pkgs.nix}/bin/nix run nixpkgs#home-manager -- switch --flake ${lib.escapeShellArg autoUpdate.flake}
+        ${pkgs.nix}/bin/nix run nixpkgs#home-manager -- switch --refresh --flake ${lib.escapeShellArg autoUpdate.flake}
       '';
     };
   };
