@@ -7,7 +7,6 @@
   homeDirectory,
   ...
 }:
-
 {
   imports = [
     ./shell
@@ -15,8 +14,12 @@
     ./security.nix
     ./tools
     ./desktop
+    ./services.nix
     ./wine
   ];
+
+  dotfiles.autoUpdate.enable = true;
+  dotfiles.nixGc.enable = true;
 
   # User information
   home.username = username;
@@ -70,23 +73,6 @@
   };
 
   programs.home-manager.enable = true;
-
-  systemd.user.services.nix-gc = {
-    Unit.Description = "Nix garbage collection for user ${config.home.username} (Service)";
-    Service = {
-      Type = "oneshot";
-      ExecStart = "/nix/var/nix/profiles/default/bin/nix-collect-garbage --delete-older-than 7d";
-    };
-  };
-
-  systemd.user.timers.nix-gc = {
-    Unit.Description = "Nix garbage collection for user ${config.home.username} (Timer)";
-    Timer = {
-      OnCalendar = "daily";
-      Persistent = true;
-    };
-    Install.WantedBy = [ "timers.target" ];
-  };
 
   programs.worktrunk = {
     enable = true;

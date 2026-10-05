@@ -15,6 +15,25 @@ with lib;
       description = "The hostname of the machine being configured.";
     };
 
+    autoUpdate = {
+      enable = mkEnableOption "automatic Home Manager updates";
+
+      flake = mkOption {
+        type = types.str;
+        default = "github:matthiasemde/dotfiles";
+        description = "Flake reference used to fetch this Home Manager configuration.";
+      };
+
+      dates = mkOption {
+        type = types.str;
+        default = "04:40";
+        description = "Systemd calendar expression for automatic Home Manager updates.";
+        example = "daily";
+      };
+    };
+
+    nixGc.enable = mkEnableOption "periodic Nix garbage collection";
+
     wine = {
       package = mkOption {
         type = types.package;

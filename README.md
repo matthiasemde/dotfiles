@@ -63,6 +63,19 @@ The `hmu` alias auto-detects the hostname and uses the matching `user@host` targ
 nix flake update
 ```
 
+The common profile enables automatic Home Manager updates and daily Nix garbage
+collection by default. Updates run at `04:40` and switch directly to
+`github:matthiasemde/dotfiles` for the current profile and host. The settings
+are defined in `common/services.nix` and can be overridden per profile or host:
+
+```nix
+dotfiles.autoUpdate.enable = false;
+dotfiles.nixGc.enable = false;
+```
+
+Set `dotfiles.autoUpdate.flake` to change the flake reference or
+`dotfiles.autoUpdate.dates` to change the systemd calendar schedule.
+
 ## Requirements
 
 - nix
