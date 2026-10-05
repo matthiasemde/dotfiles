@@ -18,10 +18,6 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    run-copilot = {
-      url = "git+ssh://git@stash.mvtec.com:7999/dp/devcontainer-base.git?ref=add-nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -32,7 +28,6 @@
       niri,
       stylix,
       nur,
-      run-copilot,
       ...
     }:
     let
@@ -90,7 +85,6 @@
               gpgSigningKey
               niri
               nur
-              run-copilot
               ;
           };
         };
