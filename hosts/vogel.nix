@@ -95,5 +95,6 @@
 
     # PDF tooling
     poppler-utils
+    img2pdf
   ];
 }
