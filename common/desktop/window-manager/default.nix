@@ -33,7 +33,7 @@
           "gtk"
           "wlr"
         ];
-        
+
         "org.freedesktop.impl.portal.FileChooser" = [
           "gtk"
         ];
