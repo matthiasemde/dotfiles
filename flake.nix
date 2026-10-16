@@ -2,8 +2,8 @@
   description = "Personal dotfiles for matthias & emdem (with per-host overrides)";
 
   inputs = {
-    self.submodules = false;
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    self.submodules = true;
+    nixpkgs.url = "git+ssh://git@stash.mvtec.com:7999/~emdem/nixpkgs-delayed.git?ref=nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     niri = {
@@ -18,6 +18,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    devcontainer-base = {
+      url = "git+ssh://git@stash.mvtec.com:7999/dp/devcontainer-base.git?ref=add-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +32,7 @@
       niri,
       stylix,
       nur,
+      devcontainer-base,
       ...
     }:
     let
@@ -85,6 +90,7 @@
               gpgSigningKey
               niri
               nur
+              devcontainer-base
               ;
           };
         };
