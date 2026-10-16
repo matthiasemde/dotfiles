@@ -1,0 +1,108 @@
+{ ... }:
+{
+  flake.modules.homeManager.base =
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
+    {
+      dotfiles.autoUpdate.enable = true;
+      dotfiles.nixGc.enable = true;
+
+      # Home Manager state version
+      home.stateVersion = "25.05";
+
+      # Home packages
+      home.packages = with pkgs; [
+        # Nix tools
+        nixfmt
+
+        # System utilities
+        tree
+        htop
+        ncdu
+        bind # provides nslookup
+
+        # Terminal utilities
+        sl # Choo choo Motherf****r
+        ripgrep
+        fd
+        bat
+        fastfetch
+        figlet # fancy strings
+        fortune
+        lolcat
+        screen
+        shfmt
+        sops
+        inetutils
+        devcontainer
+
+        # simplified man pages
+        tldr
+
+        # Development tools
+        lazygit
+        github-copilot-cli
+
+        # Media tools
+        imagemagick
+      ];
+
+      # Environment variables
+      home.sessionVariables = {
+        EDITOR = "code --wait";
+        VISUAL = "code --wait";
+        SHELL = "${pkgs.zsh}/bin/zsh";
+      };
+
+      programs.home-manager.enable = true;
+
+      programs.worktrunk = {
+        enable = true;
+        package = pkgs.worktrunk;
+        enableZshIntegration = true;
+        enableBashIntegration = true;
+      };
+
+      # Enable essential programs
+      programs.zoxide.enable = true;
+      programs.fzf = {
+        enable = true;
+        historyWidget.command = "";
+      };
+
+      programs.eza = {
+        enable = true;
+        icons = "auto";
+        colors = "auto";
+        extraOptions = [
+          "--group-directories-first"
+          "--header"
+        ];
+      };
+
+      programs.yazi = {
+        enable = true;
+        shellWrapperName = "y";
+      };
+
+      programs.uv.enable = true;
+
+      programs.btop.enable = true;
+
+      # GitHub CLI configuration with secure credential storage
+      programs.gh = {
+        enable = true;
+        gitCredentialHelper.enable = true;
+        settings = {
+          git_protocol = "ssh";
+          prompt = "enabled";
+        };
+      };
+
+      programs.opencode.enable = true;
+    };
+}

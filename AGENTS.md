@@ -7,31 +7,36 @@ This is a **Personal Nix Home Manager Dotfiles Repository** for user `matthias` 
 **Repository Structure:**
 ```
 dotfiles/
-├── flake.nix              # Main Nix flake configuration
-├── flake.lock             # Nix flake lock file
-├── home/                  # Home Manager configurations
-│   ├── common.nix         # Shared configuration for both users
-│   ├── matthias.nix       # Personal config overrides
-│   ├── emdem.nix          # Work config overrides (minimal)
-│   ├── git/               # Git configuration module
-│   │   ├── default.nix
-│   │   └── git.nix
-│   └── shell/             # Shell configuration module
-│       ├── default.nix
-│       ├── zsh.nix
-│       ├── atuin.nix
-│       ├── config.zsh
-│       ├── aliases.zsh
-│       └── .p10k.zsh
-├── raw/                   # Raw configuration files
-│   └── authorized_keys    # SSH authorized keys
-└── README.md              # Installation instructions
+├── flake.nix              # Public inputs and flake-parts entry point
+├── flake.lock             # Public-only dependency graph
+├── modules/
+│   ├── shared/            # Top-level Dendritic feature modules
+│   │   ├── home-manager.nix # Typed profile/host registry
+│   │   ├── options.nix    # Home Manager dotfiles options
+│   │   ├── git/
+│   │   ├── shell/
+│   │   └── desktop/
+│   └── personal/          # Personal profile and host modules
+├── packages/              # Package expressions, not automatically imported
+├── work/                  # Optional, independently versioned Git submodule
+│   ├── flake.nix          # Work inputs, including internal Stash sources
+│   ├── modules/           # Work profile and features
+│   └── assets/            # HALCON shell payloads
+└── README.md
 ```
+
+Every configuration Nix file under `modules/` is a flake-parts module. Features
+merge deferred Home Manager modules under `flake.modules.homeManager`.
+The root exports `flakeModules.shared`, which the work flake evaluates with its
+own inputs. Never import work or declare private inputs in the public root.
+Identity lives in `home.username`, `home.homeDirectory`, and `dotfiles.identity`,
+not `extraSpecialArgs`. Non-Nix assets may be colocated with feature modules.
 
 ## Key Technologies & Tools
 
 - **Nix Flakes**: Modern package management and system configuration
 - **Home Manager**: User environment management for Nix
+- **Dendritic**: flake-parts and import-tree for feature composition
 - **ZSH**: Primary shell with Powerlevel10k theme
 - **Git**: Version control with extensive aliases and configuration
 - **Atuin**: Enhanced shell history with Catppuccin theme
@@ -48,7 +53,7 @@ dotfiles/
 ### 2. `emdem` (Work/MVTec)
 - **Email**: matthias.emde@mvtec.com
 - **Home**: /home/emdem
-- **Config**: Minimal overrides, mostly inherits from common.nix
+- **Config**: Composes shared modules with work inputs in `work/flake.nix`
 
 ## Core Packages & Tools
 
@@ -97,25 +102,30 @@ dotfiles/
 ## Installation Commands
 
 ```bash
-# Personal profile
-nix run github:nix-community/home-manager -- switch --flake .#matthias
+# Personal profile (automatically selects user@host when available)
+home-manager switch --flake ~/dotfiles
 
-# Work profile  
-nix run github:nix-community/home-manager -- switch --flake .#emdem
+# Work profile (one activation for shared and work features)
+home-manager switch --flake ~/dotfiles/work
 
-# Update flake
+# Update public inputs from the public root
 nix flake update
 
-# Quick home manager update (alias: hmu)
-nix build ~/dotfiles#$USER && ./result/bin/home-manager-generation
+# Update work inputs from the work directory
+nix flake update --flake ~/dotfiles/work
 ```
+
+Work's independent lock requires the public shared-module export to be
+published first. See README.md for development overrides and publishing order.
+Changes in work must be committed in that repository separately before updating
+the public submodule pointer. Do not persist local development input overrides.
 
 ## Key Aliases & Functions
 
 **Configuration Editing:**
-- `brc` - Edit shell config
-- `als` - Edit aliases
-- `hmu` - Update home manager
+- Shared shell config: `modules/shared/shell/`
+- Personal identity and host assignment: `modules/personal/profile.nix`
+- Work identity and host assignment: `work/modules/profile.nix`
 
 **HALCON Development:**
 - `hb()` - Build and set environment
@@ -142,7 +152,7 @@ nix build ~/dotfiles#$USER && ./result/bin/home-manager-generation
 
 1. **No Root Required**: Repository is designed to work without root privileges
 2. **Multi-User Setup**: Supports both personal and work profiles
-3. **Modular Design**: Configuration split into logical modules (git, shell, etc.)
+3. **Modular Design**: Dendritic features compose via top-level flake-parts modules
 4. **Work Integration**: Heavy integration with MVTec/HALCON development workflow
 5. **Theme Consistency**: Catppuccin theme used across tools (Atuin, FZF)
 
