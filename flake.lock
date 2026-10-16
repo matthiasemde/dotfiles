@@ -68,27 +68,6 @@
         "type": "github"
       }
     },
-    "devcontainer-base": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1791526865,
-        "narHash": "sha256-4zE9zVj3Ya59pd9sWP+cYfhntxe42W0PYzBymEZU4sc=",
-        "ref": "add-nix-flake",
-        "rev": "8b30f122c57be2a5f0b81756316934e5728a17ee",
-        "revCount": 66,
-        "type": "git",
-        "url": "ssh://git@stash.mvtec.com:7999/dp/devcontainer-base.git"
-      },
-      "original": {
-        "ref": "add-nix-flake",
-        "type": "git",
-        "url": "ssh://git@stash.mvtec.com:7999/dp/devcontainer-base.git"
-      }
-    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -106,6 +85,26 @@
       }
     },
     "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790898470,
+        "narHash": "sha256-zTwuwezD0w3hpga6a6P8emidzAZFyWqlNeRBlpWOOl8=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "024633cd702b10285db5cb19b40ad48d2399ba60",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "flake-parts_2": {
       "inputs": {
         "nixpkgs-lib": [
           "nur",
@@ -126,7 +125,7 @@
         "type": "github"
       }
     },
-    "flake-parts_2": {
+    "flake-parts_3": {
       "inputs": {
         "nixpkgs-lib": [
           "stylix",
@@ -202,6 +201,21 @@
         "type": "github"
       }
     },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1788467110,
+        "narHash": "sha256-ljEMTXP/rH0tOvDzc9gzwww6KcHRPRnEHzd9lK48V7s=",
+        "owner": "denful",
+        "repo": "import-tree",
+        "rev": "eb1b52eaecc57f7c136d07ae8a93e724dfecac46",
+        "type": "github"
+      },
+      "original": {
+        "owner": "denful",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -262,18 +276,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1791508546,
-        "narHash": "sha256-cFiwC5tQfxIZY8BhYRRS6vIfKQxYHXXT7BY2S60q4Kw=",
-        "ref": "nixos-unstable",
-        "rev": "c8dd70ae14e7a4e43e6e5fd2f1a0578cc7a35ca5",
-        "revCount": 1087625,
-        "type": "git",
-        "url": "ssh://git@stash.mvtec.com:7999/~emdem/nixpkgs-delayed.git"
+        "lastModified": 1791956154,
+        "narHash": "sha256-jBYGPi4udQ9uo4KQp9m2J0546nJVQitG15gvZSaVVAs=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "55bfb4d7437bd4e09ab7cba58a43bd68eb310044",
+        "type": "github"
       },
       "original": {
+        "owner": "NixOS",
         "ref": "nixos-unstable",
-        "type": "git",
-        "url": "ssh://git@stash.mvtec.com:7999/~emdem/nixpkgs-delayed.git"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-stable": {
@@ -294,7 +308,7 @@
     },
     "nur": {
       "inputs": {
-        "flake-parts": "flake-parts",
+        "flake-parts": "flake-parts_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -340,8 +354,9 @@
     },
     "root": {
       "inputs": {
-        "devcontainer-base": "devcontainer-base",
+        "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "niri": "niri",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
@@ -355,7 +370,7 @@
         "base16-helix": "base16-helix",
         "base16-vim": "base16-vim",
         "firefox-gnome-theme": "firefox-gnome-theme",
-        "flake-parts": "flake-parts_2",
+        "flake-parts": "flake-parts_3",
         "gnome-shell": "gnome-shell",
         "nixpkgs": [
           "nixpkgs"

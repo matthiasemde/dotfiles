@@ -25,3 +25,19 @@ jobs:
 
       - name: Flake check
         run: nix flake check
+
+      - name: Evaluate supported Home Manager profiles
+        # hindemith retains its pre-existing invalid desktop option.
+        run: |
+          nix eval --json .#homeConfigurations --apply '
+            configs: builtins.mapAttrs (_: hm: hm.activationPackage.drvPath) {
+              inherit (configs) matthias "matthias@vogel";
+            }
+          '
+
+      - name: Verify public input isolation
+        run: |
+          jq -e '
+            [.nodes[] | .locked?, .original? | select(. != null)] |
+            all(.[]; (.type != "path") and (.type != "git") and (.type != "indirect"))
+          ' flake.lock
