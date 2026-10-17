@@ -114,4 +114,6 @@
       prompt = "enabled";
     };
   };
+
+  programs.opencode.enable = true;
 }
