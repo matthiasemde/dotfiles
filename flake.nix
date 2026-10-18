@@ -6,6 +6,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.url = "github:Mic92/sops-nix";
     niri = {
       url = "github:epireyn/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +26,7 @@
       self,
       nixpkgs,
       home-manager,
+      sops-nix,
       niri,
       stylix,
       nur,
@@ -44,8 +46,14 @@
         dir: hostname:
         let
           hostFile = dir + "/${hostname}.nix";
+          hostDir = dir + "/${hostname}";
         in
-        if builtins.pathExists hostFile then [ hostFile ] else [ ];
+        if builtins.pathExists hostFile then
+          [ hostFile ]
+        else if builtins.pathExists hostDir then
+          [ hostDir ]
+        else
+          [ ];
 
       # -------------------------------------------------
       #  mkConfig: build a Home Manager configuration
@@ -66,6 +74,7 @@
           modules = [
             ./options.nix
             ./common
+            sops-nix.homeManagerModules.sops
             niri.homeModules.niri
             stylix.homeModules.stylix
           ]

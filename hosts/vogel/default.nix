@@ -14,6 +14,11 @@
   dotfiles.desktop.enable = true;
   dotfiles.desktop.wallpaper = "/mnt/mahler/files/Bilder/Wallpapers/SchottlandWallpaper.jpg";
 
+  sops.secrets.mqttPassword = {
+    format = "binary";
+    sopsFile = ./secrets/mqttPassword;
+  };
+
   # launcher for minecraft
   programs.prismlauncher.enable = true;
 
@@ -67,6 +72,16 @@
     ];
   };
 
+  dotfiles.volume-control = {
+    enable = true;
+    broker = "mosquitto.mahler.local"; # Your MQTT broker IP
+    port = 1883;
+    user = "homeassistant";
+    passwordFile = config.sops.secrets.mqttPassword.path;
+    topic = "home/desktop/volume";
+    # sink = "@DEFAULT_AUDIO_SINK@";  # Default, change if needed
+  };
+
   home.packages = with pkgs; [
     android-studio
     android-tools
@@ -96,5 +111,8 @@
     # PDF tooling
     poppler-utils
     img2pdf
+
+    # Multi Media
+    music-assistant-desktop
   ];
 }

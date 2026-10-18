@@ -1,0 +1,14 @@
+keys:
+  # - Admin keys (used to encrypt secrets from your workstation) -----
+  # Your YubiKey age identity (generate with: age-plugin-yubikey --generate)
+  - &admin_yubikey "age1yubikey1qfxert3c6e83vk20ggq70r22pkvu3636cslf4kxa5gdrj900hqf2qaxhcfa"
+
+  # - User decryption keys (stored at /home/<user>/.age-key.txt on each host) -
+  - &matthias_user "age1afhnp98ww6y8pa0vxy6f3xxkr80kdp00jm0htey3cyewge22tqnsqf8ep7"
+
+creation_rules:
+  - path_regex: hosts/vogel/secrets/.*$
+    key_groups:
+      - age:
+          - *admin_yubikey
+          - *matthias_user

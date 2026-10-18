@@ -14,8 +14,9 @@
     ./security.nix
     ./tools
     ./desktop
-    ./services.nix
+    ./services
     ./wine
+    ./sops.nix
   ];
 
   dotfiles.autoUpdate.enable = true;

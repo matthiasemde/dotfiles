@@ -69,6 +69,8 @@ in
           donjayamanne.githistory
           ms-vscode.hexeditor
           ms-vscode-remote.remote-ssh
+          ms-vscode.cpptools
+          shd101wyy.markdown-preview-enhanced
           github.copilot
           github.copilot-chat
         ];
