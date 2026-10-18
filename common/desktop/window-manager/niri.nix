@@ -110,6 +110,20 @@
 
         "Mod+W".action.close-window = [ ];
         "Mod+D".action.quit = [ ];
+
+        # media controls
+        "XF86AudioRaiseVolume".allow-when-locked = true;
+        "XF86AudioRaiseVolume".action.spawn = [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+" ];
+        "XF86AudioLowerVolume".allow-when-locked = true;
+        "XF86AudioLowerVolume".action.spawn = [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-" ];
+        "XF86AudioMute".allow-when-locked = true;
+        "XF86AudioMute".action.spawn = [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
+        "XF86AudioPlay".allow-when-locked = true;
+        "XF86AudioPlay".action.spawn = [ "playerctl" "play-pause" ];
+        "XF86AudioNext".allow-when-locked = true;
+        "XF86AudioNext".action.spawn = [ "playerctl" "next" ];
+        "XF86AudioPrev".allow-when-locked = true;
+        "XF86AudioPrev".action.spawn = [ "playerctl" "previous" ];
       };
     };
   };

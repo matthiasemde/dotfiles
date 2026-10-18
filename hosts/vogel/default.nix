@@ -72,14 +72,16 @@
     ];
   };
 
-  dotfiles.volume-control = {
+  dotfiles.media-remote = {
     enable = true;
     broker = "mosquitto.mahler.local"; # Your MQTT broker IP
     port = 1883;
     user = "homeassistant";
     passwordFile = config.sops.secrets.mqttPassword.path;
-    topic = "home/desktop/volume";
+    topic = "home/desktop/media-remote";
     # sink = "@DEFAULT_AUDIO_SINK@";  # Default, change if needed
+    skipIntroClickX = 1205;  # X
+    skipIntroClickY = 680;   # Y
   };
 
   home.packages = with pkgs; [
@@ -88,9 +90,16 @@
     discord
     kopia-ui
 
+    # Vendor-neutral microcontroller tools
+    esptool
+    esphome
+    openocd
+    tio
+    usbutils
+
     # CAD & 3D printing
     prusa-slicer
-    freecad
+    # freecad
 
     # Ripping cds
     abcde

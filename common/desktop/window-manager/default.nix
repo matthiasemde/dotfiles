@@ -19,6 +19,8 @@
       swaybg
       libsecret
       xwayland-satellite # xwayland support
+      playerctl
+      wireplumber # provides wpctl
     ];
 
     xdg.portal = {

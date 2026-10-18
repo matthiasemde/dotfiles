@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./mqtt-volume-control.nix
+    ./mqtt-media-remote.nix
     ./nix-util.nix
   ];
 }

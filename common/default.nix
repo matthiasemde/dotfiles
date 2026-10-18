@@ -104,6 +104,8 @@
     shellWrapperName = "y";
   };
 
+  programs.uv.enable = true;
+
   programs.btop.enable = true;
 
   # GitHub CLI configuration with secure credential storage
