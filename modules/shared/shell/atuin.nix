@@ -24,6 +24,9 @@
           show_help = false;
           prefers_reduced_motion = true;
           secrets_filter = true;
+          search = {
+            filters = ["host" "global"  "session" "directory"];
+          };
           history_filter = [
             # Exclude assignments and CLI arguments carrying credentials not covered by Atuin's built-in filter.
             "(?i)(password|passwd|secret|token|api[_-]?key|access[_-]?key|private[_-]?key)[A-Za-z0-9_]*[[:space:]]*[:=][[:space:]]*[^[:space:]]+"
