@@ -50,68 +50,68 @@ def run_playerctl(args):
 
 def click_at(x, y):
     """Click at absolute screen coordinates."""
-    is_wayland = bool(os.getenv("WAYLAND_DISPLAY"))
-    logger.info(f"Clicking at ({x}, {y}) on {'Wayland' if is_wayland else 'X11'}")
+    logger.info(f"Clicking at ({x}, {y})")
     logger.info(
         f"Environment: WAYLAND_DISPLAY={os.getenv('WAYLAND_DISPLAY')}, XDG_RUNTIME_DIR={os.getenv('XDG_RUNTIME_DIR')}, YDOTOOL_SOCKET={os.getenv('YDOTOOL_SOCKET')}"
     )
-    if is_wayland:
-        # Check if ydotoold is running
-        try:
-            r = subprocess.run(
-                ["pgrep", "-x", "ydotoold"], capture_output=True, text=True
-            )
-            logger.info(
-                f"ydotoold process check: rc={r.returncode}, output={r.stdout.strip()}"
-            )
-        except FileNotFoundError:
-            logger.warning("pgrep not found, skipping ydotoold process check")
-        # Check common socket paths
-        uid = os.getenv("UID", "1000")
-        socket_paths = [
-            f"/run/user/{uid}/ydotoold/socket",
-            "/run/ydotoold/socket",
-            f"/run/user/{uid}/ydotool/socket",
-        ]
-        for path in socket_paths:
-            exists = os.path.exists(path)
-            logger.info(f"Socket {path}: {'exists' if exists else 'missing'}")
-        # Run ydotool with debug
-        cmd = ["ydotool", "mousemove", "-a", str(x), str(y)]
-        logger.info(f"Running: {' '.join(cmd)}")
-        r = subprocess.run(cmd, capture_output=True, text=True)
-        logger.info(
-            f"ydotool mousemove: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+    # Check if ydotoold is running
+    try:
+        r = subprocess.run(
+            ["pgrep", "-x", "ydotoold"], capture_output=True, text=True
         )
-        if r.returncode != 0:
-            logger.error(f"ydotool mousemove failed: {r.stderr.strip()}")
-            logger.error(
-                "Hint: In systemd user service, you may need to set YDOTOOL_SOCKET env var"
-            )
-            logger.error(
-                "Try adding to service: Environment=YDOTOOL_SOCKET=/run/user/%U/ydotoold/socket"
-            )
-            return False
-        time.sleep(0.1)
-        cmd = ["ydotool", "click", "0x40", "0x80"] # 0x00 - LEFT
-        logger.info(f"Running: {' '.join(cmd)}")
-        r = subprocess.run(cmd, capture_output=True, text=True)
         logger.info(
-            f"ydotool click: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+            f"ydotoold process check: rc={r.returncode}, output={r.stdout.strip()}"
         )
-        if r.returncode != 0:
-            logger.error(f"ydotool click failed: {r.stderr.strip()}")
-            return False
-    else:
-        cmd = ["xdotool", "mousemove", str(x), str(y), "click", "1"]
-        logger.info(f"Running: {' '.join(cmd)}")
-        r = subprocess.run(cmd, capture_output=True, text=True)
-        logger.info(
-            f"xdotool: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+    except FileNotFoundError:
+        logger.warning("pgrep not found, skipping ydotoold process check")
+    # Check common socket paths
+    uid = os.getenv("UID", "1000")
+    socket_paths = [
+        f"/run/user/{uid}/ydotoold/socket",
+        "/run/ydotoold/socket",
+        f"/run/user/{uid}/ydotool/socket",
+    ]
+    for path in socket_paths:
+        exists = os.path.exists(path)
+        logger.info(f"Socket {path}: {'exists' if exists else 'missing'}")
+    # Run ydotool with debug
+    cmd = ["ydotool", "mousemove", "-a", str(x), str(y)]
+    logger.info(f"Running: {' '.join(cmd)}")
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    logger.info(
+        f"ydotool mousemove: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+    )
+    if r.returncode != 0:
+        logger.error(f"ydotool mousemove failed: {r.stderr.strip()}")
+        logger.error(
+            "Hint: In systemd user service, you may need to set YDOTOOL_SOCKET env var"
         )
-        if r.returncode != 0:
-            logger.error(f"xdotool failed: {r.stderr.strip()}")
-            return False
+        logger.error(
+            "Try adding to service: Environment=YDOTOOL_SOCKET=/run/user/%U/ydotoold/socket"
+        )
+        return False
+    time.sleep(0.1)
+    cmd = ["ydotool", "click", "0x40", "0x80"] # 0x00 - LEFT
+    logger.info(f"Running: {' '.join(cmd)}")
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    logger.info(
+        f"ydotool click: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+    )
+    if r.returncode != 0:
+        logger.error(f"ydotool click failed: {r.stderr.strip()}")
+        return False
+    logger.info("Click successful")
+    # Move the mouse back to allow the UI to hide
+    time.sleep(0.1)
+    cmd = ["ydotool", "mousemove", "-a", str(x/2), str(y/2)]
+    logger.info(f"Running: {' '.join(cmd)}")
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    logger.info(
+        f"ydotool mousemove: rc={r.returncode}, stdout={r.stdout.strip()!r}, stderr={r.stderr.strip()!r}"
+    )
+    if r.returncode != 0:
+        logger.error(f"ydotool mousemove failed: {r.stderr.strip()}")
+        return False
     logger.info("Click successful")
     return True
 
