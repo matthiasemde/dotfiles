@@ -30,6 +30,7 @@
 
       systemd.user.services.home-manager-auto-update = lib.mkIf autoUpdate.enable {
         Unit.Description = "Automatically update Home Manager configuration";
+        Unit.X-SwitchMethod = "keep-old";
         Service = {
           Type = "oneshot";
           ExecStart = ''
