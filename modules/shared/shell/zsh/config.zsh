@@ -18,6 +18,9 @@ zle -N forward-subword  forward-word-match
 zstyle ':zle:backward-subword' word-style normal
 zstyle ':zle:forward-subword'  word-style normal
 bindkey '^[[1;5D' backward-subword
+
+# Ctrl+Right: also accept autosuggestions up to the next subword boundary
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-subword)
 bindkey '^[[1;5C' forward-subword
 
 # Alt+Left / Alt+Right: move by space-delimited WORDs
