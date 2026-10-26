@@ -25,7 +25,12 @@
           prefers_reduced_motion = true;
           secrets_filter = true;
           search = {
-            filters = ["host" "global"  "session" "directory"];
+            filters = [
+              "host"
+              "global"
+              "session"
+              "directory"
+            ];
           };
           history_filter = [
             # Exclude assignments and CLI arguments carrying credentials not covered by Atuin's built-in filter.
