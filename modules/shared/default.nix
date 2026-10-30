@@ -49,6 +49,9 @@
 
         # Media tools
         imagemagick
+
+        # Life management tools
+        tuxedo
       ];
 
       # Environment variables
