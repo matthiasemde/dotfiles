@@ -79,7 +79,7 @@
           stash.showPatch = true;
           submodule = {
             fetchJobs = 4;
-            recurse = false;
+            recurse = true;
           };
           rebase = {
             autosquash = true;
