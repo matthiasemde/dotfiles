@@ -39,6 +39,8 @@
         sops
         inetutils
         devcontainer
+        unzip
+        yamllint
 
         # simplified man pages
         tldr
