@@ -90,6 +90,16 @@
             ];
             "Mod+O".action.toggle-overview = [ ];
             "Mod+L".action.power-off-monitors = [ ];
+            "Mod+S".action.spawn = [
+              "sh"
+              "-c"
+              "grim -g \"$(slurp)\" - | satty -f -"
+            ];
+            "Mod+Shift+S".action.spawn = [
+              "sh"
+              "-c"
+              "grim -g \"$(slurp)\" - | wl-copy"
+            ];
 
             "Mod+Left".action.focus-column-left = [ ];
             "Mod+Down".action.focus-window-down = [ ];

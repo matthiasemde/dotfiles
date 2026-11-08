@@ -16,6 +16,9 @@
           xwayland-satellite # xwayland support
           playerctl
           wireplumber # provides wpctl
+          grim # screenshot utility
+          slurp # region selector
+          satty # annotation tool
         ];
 
         xdg.portal = {
