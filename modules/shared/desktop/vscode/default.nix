@@ -74,8 +74,7 @@
               ms-vscode-remote.remote-ssh
               ms-vscode.cpptools
               shd101wyy.markdown-preview-enhanced
-              github.copilot
-              github.copilot-chat
+              mathiasfrohlich.kotlin
             ];
 
             userSettings = builtins.fromJSON (builtins.readFile settings);
