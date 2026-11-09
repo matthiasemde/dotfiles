@@ -1,4 +1,4 @@
-{ solidcraft, ... }:
+{ inputs, ... }:
 {
   dotfiles.hosts.vogel.module =
     {
@@ -103,7 +103,7 @@
         # CAD & 3D printing
         prusa-slicer
         # freecad
-        solidcraft.packages.${pkgs.system}.default
+        inputs.solidcraft.packages.${pkgs.system}.default
 
         # Ripping cds
         abcde

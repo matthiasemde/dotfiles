@@ -47,10 +47,11 @@
 
         # Development tools
         lazygit
-        github-copilot-cli
+        # github-copilot-cli
 
         # Media tools
         imagemagick
+        darktable # Virtual lighttable and darkroom for photographers
 
         # Life management tools
         tuxedo
