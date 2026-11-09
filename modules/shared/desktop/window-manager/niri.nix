@@ -23,7 +23,6 @@
           hotkey-overlay.skip-at-startup = true;
           # ask windows to omit client-side-decorations
           prefer-no-csd = true;
-          gestures.hot-corners.enable = false;
           layout = {
             gaps = 12;
             center-focused-column = "never";
